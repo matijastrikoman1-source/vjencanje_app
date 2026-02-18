@@ -34,7 +34,3 @@ with st.form("forma_za_unos"):
 st.divider()
 st.subheader("Trenutni popis:")
 st.dataframe(df)
-
-
-
-
