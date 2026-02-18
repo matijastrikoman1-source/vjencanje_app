@@ -25,7 +25,7 @@ with st.expander("➕ Dodaj novog gosta"):
         if gumb and ime:
             novi = pd.DataFrame([[ime, grupa, potvrda, ""]], columns=['Ime i Prezime', 'Grupa', 'Potvrda', 'Napomena'])
             df = pd.concat([df, novi], ignore_index=True)
-            conn.update(data=df)
+            conn.update(worksheet="Sheet1", data=df)
             st.success(f"Dodan/a {ime}!")
             st.rerun()
 
@@ -33,4 +33,5 @@ with st.expander("➕ Dodaj novog gosta"):
 st.divider()
 st.subheader("Trenutni popis:")
 st.dataframe(df, use_container_width=True)
+
 
