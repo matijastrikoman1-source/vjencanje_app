@@ -8,12 +8,11 @@ st.title("Lista Uzvanika 🥂")
 
 # 2. Povezivanje s Google Sheets (čita link iz .streamlit/secrets.toml)
 try:
-    conn = st.connection("gsheets", type=GSheetsConnection)
-    df = conn.read(ttl="0")
+    df = conn.read(worksheet="List 1", ttl=5)
+    st.write("Uspješno povezano s tablicom!") # Ovo će nam potvrditi da radi
 except Exception as e:
-    st.error("Problem s povezivanjem! Provjeri .streamlit/secrets.toml")
-    df = pd.DataFrame(columns=['Ime i Prezime', 'Grupa', 'Potvrda', 'Napomena'])
-
+    st.error(f"Pokušao sam otvoriti 'List 1', ali Google kaže: {e}")
+    st.stop()
 # 3. Forma za unos novih gostiju
 with st.expander("➕ Dodaj novog gosta"):
     with st.form("forma"):
@@ -33,6 +32,7 @@ with st.expander("➕ Dodaj novog gosta"):
 st.divider()
 st.subheader("Trenutni popis:")
 st.dataframe(df, use_container_width=True)
+
 
 
 
